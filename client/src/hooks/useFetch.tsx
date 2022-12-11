@@ -5,6 +5,10 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+// axios.defaults.proxy.host = "http://www.demoapp.com"
+// baseURL ("axios.defaults.baseURL")
+// axios.defaults.baseURL = "http://localhost:7777";
+axios.defaults.baseURL = "http://127.0.0.1:7777";
 
 export const useFetch = (url: string, body?: any) => {
   const [response, setResponse] = useState<any>([]);
@@ -16,8 +20,14 @@ export const useFetch = (url: string, body?: any) => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(url);
+        // const { data } = await axios.get(url, {
+        //   proxy: {
+        //     host: "localhost",
+        //     port: 7777,
+        //   },
+        // });
         // const { data } = await axios.get(`http://localhost:7777${url}`); // TODO DELETEME
-
+        console.log(`data: ${data}`);
         setResponse(data);
       } catch (error: any) {
         error.message !==

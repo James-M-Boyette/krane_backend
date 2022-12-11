@@ -32,7 +32,8 @@ export class AppController {
 
   // @Get('/post')
   // @Get('/post:id')
-  @Get('/api/posts')
+  // @Get('/api/posts')
+  @Get('/api/post')
   getPosts() {
     return this.appService.getPosts();
   }

@@ -15,10 +15,11 @@ const options = {
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // app.enableCors(options); // TODO DELETEME
-  app.enableCors({
-    // TODO DELETEME
-    origin: 'localhost:3000',
-  });
+  // app.enableCors({
+  //   // TODO DELETEME
+  //   origin: 'localhost:3000',
+  // });
+  app.enableCors();
   await app.listen(PORT);
   console.log('listening on', PORT);
 }
