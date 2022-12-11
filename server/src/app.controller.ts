@@ -1,6 +1,8 @@
 import { Controller, Get, Body, Post, HttpCode, Param } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { AppService } from './app.service';
+import { PostsService } from './posts/posts.service';
+import { BlogPost } from '@prisma/client';
 
 /**
  ** This is Nest's 'controller' ...
@@ -46,8 +48,13 @@ export class AppController {
   //   return this.postsService.findOne(+id);
   // }
 
+  // @Post('/api/post')
+  // createPost(@Body() createPostDto: CreatePostDto) {
+  //   return this.appService.createPost(createPostDto);
+  // }
   @Post('/api/post')
-  createPost(@Body() createPostDto: CreatePostDto) {
-    return this.appService.createPost(createPostDto);
+  async createTodo(@Body() postData: BlogPost): Promise<BlogPost> {
+    console.log(`data (app.controller): ${postData}`);
+    return this.appService.createPost(postData);
   }
 }

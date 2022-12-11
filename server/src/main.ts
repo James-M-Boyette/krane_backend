@@ -13,13 +13,16 @@ const options = {
 };
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  // const app = await NestFactory.create(AppModule);
   // app.enableCors(options); // TODO DELETEME
   // app.enableCors({
   //   // TODO DELETEME
   //   origin: 'localhost:3000',
   // });
-  app.enableCors();
+  // app.enableCors();
+  const app = await NestFactory.create(AppModule, {
+    cors: true,
+  });
   await app.listen(PORT);
   console.log('listening on', PORT);
 }
