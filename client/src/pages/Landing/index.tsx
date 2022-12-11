@@ -11,14 +11,18 @@ const PostComponent = (props: any) => (
     <p className="p-5">{props.textBody || "No Body"}</p>
     <div className="w-full flex align-left">
       <p className="px-3">
-        {props.createdAt ? new Date(props.createdAt).toDateString() : DEMO_TEXT.CREATED_AT}
+        {props.createdAt
+          ? new Date(props.createdAt).toDateString()
+          : DEMO_TEXT.CREATED_AT}
       </p>
     </div>
   </div>
 );
 
 const PostInputComponent = (props: any) => (
-  <form onSubmit={props.uploadPost} className=" text-black min-h-2/3 flex flex-col gap-5">
+  <form
+    onSubmit={props.uploadPost}
+    className=" text-black min-h-2/3 flex flex-col gap-5">
     <input
       onChange={(e) => props.setTitle(e.target.value)}
       type="text"
@@ -29,12 +33,10 @@ const PostInputComponent = (props: any) => (
     <textarea
       onChange={(e) => props.setBody(e.target.value)}
       className="block p-2.5 w-full text-sm text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      placeholder="Your message..."
-    ></textarea>
+      placeholder="Your message..."></textarea>
     <button
       type="submit"
-      className="inline-block px-6 py-2.5 bg-gray-200 text-gray-700 font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
-    >
+      className="inline-block px-6 py-2.5 bg-gray-200 text-gray-700 font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
       Submit
     </button>
   </form>
@@ -49,6 +51,7 @@ function LandingPage() {
   const uploadPost = async (e: any) => {
     e.preventDefault();
     //@ts-ignore
+    console.log(`API_ENDPOINT.UPLOAD_POST: ${API_ENDPOINT.UPLOAD_POST}`);
     try {
       const { data } = await axios.post(API_ENDPOINT.UPLOAD_POST, {
         title: title,
@@ -72,8 +75,7 @@ function LandingPage() {
           {error && (
             <div
               className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
-              role="alert"
-            >
+              role="alert">
               <span className="font-medium">Error:</span>
               {error}
             </div>
@@ -83,13 +85,16 @@ function LandingPage() {
             <button
               type="button"
               onClick={togglePosting}
-              className="inline-block px-6 py-2.5 bg-gray-200 text-gray-700 font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
-            >
+              className="inline-block px-6 py-2.5 bg-gray-200 text-gray-700 font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
               {isPosting ? "View Posts" : "Make a Post"}
             </button>
           </div>
           {isPosting ? (
-            <PostInputComponent uploadPost={uploadPost} setTitle={setTitle} setBody={setBody} />
+            <PostInputComponent
+              uploadPost={uploadPost}
+              setTitle={setTitle}
+              setBody={setBody}
+            />
           ) : (
             <>
               {posts.map((post: any, i: number) => (

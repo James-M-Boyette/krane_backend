@@ -1,4 +1,5 @@
 import { Controller, Get, Body, Post, HttpCode, Param } from '@nestjs/common';
+import { CreatePostDto } from './dto/create-post.dto';
 import { AppService } from './app.service';
 
 /**
@@ -10,11 +11,11 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {} // This imports the `app.service.ts` as a 'Provider' of this class's constructor
 
-  @Get() // Decorated with HTTP Verb (GET, POST, PATCH, etc.)
-  getHello(): string {
-    // ⬆️ Controller Method 'getHello' ⬆️
-    return this.appService.getHello(); // Performs & returns appService's `getHello()` method (which, in this case, returns a string ...); this is the response body (even if injected from another service)
-  }
+  // @Get() // Decorated with HTTP Verb (GET, POST, PATCH, etc.)
+  // getHello(): string {
+  //   // ⬆️ Controller Method 'getHello' ⬆️
+  //   return this.appService.getHello(); // Performs & returns appService's `getHello()` method (which, in this case, returns a string ...); this is the response body (even if injected from another service)
+  // }
 
   @HttpCode(200)
   @Get('/health')
@@ -22,18 +23,30 @@ export class AppController {
     return this.appService.getHealth();
   }
 
+  /**
+   * ! What to do next:
+   * > Write a route + logic that will store a post from the FE to the database
+   * > Write a route + logic that will return all posts from the DB to the FE
+   * > Write a route + logic that will return one specific post from the DB to the FE (THIS MAY BE UNNECESSARY)
+   */
+
   // @Get('/post')
   // @Get('/post:id')
   @Get('/api/posts')
-  getPosts(@Body() body, @Param('id') id): string {
+  getPosts() {
     return this.appService.getPosts();
   }
   @Get('/api/post:id')
-  getPost(@Body() body, @Param('id') id): string {
+  getPost(@Param('id') id: string) {
     return this.appService.getPost();
   }
-  @Post('/api/post:id')
-  createPost(@Body() body, @Param('id') id): string {
-    return this.appService.createPost();
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.postsService.findOne(+id);
+  // }
+
+  @Post('/api/post')
+  createPost(@Body() createPostDto: CreatePostDto) {
+    return this.appService.createPost(createPostDto);
   }
 }

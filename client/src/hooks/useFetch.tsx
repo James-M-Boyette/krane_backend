@@ -12,13 +12,16 @@ export const useFetch = (url: string, body?: any) => {
   const [abort, setAbort] = useState(() => {});
 
   useEffect(() => {
+    console.log(`url: ${url}`); // TODO DELETEME
     const fetchData = async () => {
       try {
         const { data } = await axios.get(url);
+        // const { data } = await axios.get(`http://localhost:7777${url}`); // TODO DELETEME
 
         setResponse(data);
       } catch (error: any) {
-        error.message !== `Unexpected token '<', "<!DOCTYPE "... is not valid JSON` &&
+        error.message !==
+          `Unexpected token '<', "<!DOCTYPE "... is not valid JSON` &&
           setError(error.message || "Unknown error");
       }
     };

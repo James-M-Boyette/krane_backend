@@ -1,7 +1,7 @@
 export const API_ENDPOINT = {
-    UPLOAD_POST: "/api/post",
-    GET_POSTS: "/api/post",
-}
+  UPLOAD_POST: "/api/post",
+  GET_POSTS: "/api/post",
+};
 
 export const DEMO_TEXT = {
   TITLE: "DEMO TITLE",
