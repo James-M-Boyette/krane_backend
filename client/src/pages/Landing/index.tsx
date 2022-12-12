@@ -55,8 +55,8 @@ function LandingPage() {
     try {
       const { data } = await axios.post(API_ENDPOINT.UPLOAD_POST, {
         title: title,
-        // text_body: body,
-        text_body: body,
+        // text_body: body, // ? Is this a typo, or do we want a second interface & convert the key to Prisma schema?
+        textBody: body,
       });
       setPosts(() => [data, ...posts]);
       setTitle(undefined);
