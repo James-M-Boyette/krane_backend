@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PrismaService } from './prisma/prisma.service';
 import { Post, BlogPost, Prisma } from '@prisma/client';
+import { text } from 'stream/consumers';
 
 @Injectable() // Decorator indicating a 'Provider'
 export class AppService {
@@ -30,9 +31,35 @@ export class AppService {
   //   return this.prisma.post.create({ data: createPostDto });
   // }
   async createPost(data: BlogPost): Promise<BlogPost> {
-    console.log(`data (app.service): ${data}`);
+    console.log(`data (app.service): ${data.textBody}`);
+    // const myData = data;
+    // const textBody = data.text_body;
+    // myData.textBody = textBody;
+    // console.log(`myData : ${myData}`);
+
+    // Object.defineProperty(
+    //   data,
+    //   new_key,
+    //   Object.getOwnPropertyDescriptor(data, old_key));
+    // delete data[old_key];
+    // Object.defineProperty(
+    //   data,
+    //   new_key,
+    //   Object.getOwnPropertyDescriptor(data, textBody),
+    // );
+    // delete data[textBody];
     return this.prisma.blogPost.create({
       data,
+      // data: {
+      //   title: title,
+      //   textBody: text_body
+      // }
+      // data: {
+      //   title: title,
+      //   textBody: text_body
+      // },
+      //  title,
+      //     textBody: text_body
     });
   }
 }
