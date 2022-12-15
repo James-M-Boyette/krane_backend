@@ -6,9 +6,7 @@ import { text } from 'stream/consumers';
 @Injectable()
 export class AppService {
   constructor(private prisma: PrismaService) {}
-  // getHello(): string {
-  //   return 'Hello World! 🌍';
-  // }
+
   getHealth(): string {
     return 'Hello! The Server is up and running 🤖';
   }

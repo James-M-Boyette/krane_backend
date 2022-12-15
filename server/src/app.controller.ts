@@ -6,12 +6,6 @@ import { BlogPost } from '@prisma/client';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  // @Get()
-  // getHello(): string {
-  //   // ⬆️ Controller Method 'getHello' ⬆️
-  //   return this.appService.getHello();
-  // }
-
   @HttpCode(200)
   @Get()
   getHealth(): string {
